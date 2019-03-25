@@ -25,7 +25,7 @@ SECRET_KEY = 'hlof&qt(cztc^mzifm4=mfjwglsi=^3d!o3blmx&+op)3sdhw$'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['deepmesh.herokuapp.com', 'localhost']
+ALLOWED_HOSTS = ['deepmesh.herokuapp.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
