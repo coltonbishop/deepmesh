@@ -16,6 +16,7 @@ Kivy-Garden==0.1.4
 MarkupSafe==1.0
 maxminddb==1.4.0
 numpy==1.14.3
+paramiko==2.4.2
 Pillow==5.1.0
 pipenv==2018.5.18
 psycopg2==2.7.4

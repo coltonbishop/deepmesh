@@ -1,0 +1,7 @@
+{% block content %}
+  <form action="download_pic/{{image.objname}}" method="post" >
+    {% csrf_token %}
+    <button type="submit" value={{image.name}}">Download</button>
+  </form>
+
+{% endblock %}

@@ -28,6 +28,9 @@ DEBUG = True
 ALLOWED_HOSTS = ['deepmesh.herokuapp.com', 'localhost', '127.0.0.1']
 
 
+MEDIA_URL = '/model/images/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'model/images')
+
 # Application definition
 
 INSTALLED_APPS = [
