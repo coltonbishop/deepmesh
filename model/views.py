@@ -46,7 +46,6 @@ def download_pic(request, imageName):
 
 		image = imageName.replace(".obj",".png")
 		filepath = 'model/images/{}'.format(image)
-		print(request)
 		hostname='ionic.cs.princeton.edu'
 		port=22
 		username='cmbishop'
@@ -60,19 +59,12 @@ def download_pic(request, imageName):
 		ssh=paramiko.SSHClient()
 		ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 		ssh.connect(hostname,port,username,password)
-
+		print("Connection to server established")
 		# Creates SCP Client and puts image
 		scp = SCPClient(ssh.get_transport())
 
-		while True:
-		    try:
-		        scp.put(filepath, remote_path='/n/fs/donatello/Pixel2Mesh/pixel2mesh/image.png')
-		    except:
-		         continue
-		    else:
-		         #the rest of the code
-		         break
-
+		scp.put(filepath, remote_path='/n/fs/donatello/Pixel2Mesh/pixel2mesh/image.png')
+		print("Image transferred")
 		stdin,stdout,stderr=ssh.exec_command('cd /n/fs/donatello/Pixel2Mesh/pixel2mesh; rm image.obj')
 		outlines=stdout.readlines()
 		resp=''.join(outlines)
@@ -83,17 +75,47 @@ def download_pic(request, imageName):
 		resp=''.join(outlines)
 		print(resp)
 
+		context = {
+			'objname': obj,
+		}
+
+		return render(request, 'model/serve.html', context)
+
+
+def serve_obj(request, objname):
+
+	if request.method == 'POST':
+
+		hostname='ionic.cs.princeton.edu'
+		port=22
+		username='cmbishop'
+		password='**Cb12751010**'
+		ssh=paramiko.SSHClient()
+		ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+		ssh.connect(hostname,port,username,password)
+		print("Connection to server established")
+		# Creates SCP Client and puts image
+		scp = SCPClient(ssh.get_transport())
+
+		objectpath = 'model/objects/{}'.format(objname)
+
 		if os.path.exists(objectpath):
 			os.remove(objectpath)
 
+		context = {
+			'objname': objname,
+		}
+
 		while True:
-		    try:
-		        scp.get(remote_path='/n/fs/donatello/Pixel2Mesh/pixel2mesh/image.obj', local_path='{}'.format(objectpath))
-		    except:
-		         continue
-		    else:
-		         #the rest of the code
-		         break
+			try:
+				scp.get(remote_path='/n/fs/donatello/Pixel2Mesh/pixel2mesh/image.obj', local_path='{}'.format(objectpath))
+				print("Object downloaded")
+			except:
+				print("SCP GET failed")
+				return render(request, 'model/serve.html', context)
+			else:
+				 #the rest of the code
+				 break
 
 		return serve(request, os.path.basename(objectpath), os.path.dirname(objectpath))
 

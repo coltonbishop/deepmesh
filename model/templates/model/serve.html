@@ -1,0 +1,7 @@
+{% block content %}
+  <form action="serve_obj/{{objname}}" method="post" >
+    {% csrf_token %}
+    <button type="submit" value={{objname}}">Download Now!</button>
+  </form>
+
+{% endblock %}

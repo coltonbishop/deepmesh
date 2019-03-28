@@ -1,7 +1,7 @@
 {% block content %}
   <form action="download_pic/{{image.objname}}" method="post" >
     {% csrf_token %}
-    <button type="submit" value={{image.name}}">Download</button>
+    <button type="submit" value={{image.name}}">Convert to Mesh!</button>
   </form>
 
 {% endblock %}

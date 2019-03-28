@@ -1,0 +1,13 @@
+
+
+<h1>Please wait 100 seconds before attempting to download.</h1>
+
+{% block content %}
+
+  <form action="serve_obj/{{objname}}" method="post" >
+    {% csrf_token %}
+    <button type="submit" value={{objname}}">Download Now!</button>
+  </form>
+
+{% endblock %}
+
