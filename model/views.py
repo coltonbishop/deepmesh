@@ -13,6 +13,19 @@ from scp import SCPClient
 import sys
 import time
 
+hostname='ionic.cs.princeton.edu'
+port=22
+username='cmbishop'
+password='**Cb12751010**'
+
+ssh=paramiko.SSHClient()
+ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+ssh.connect(hostname,port,username,password)
+print("Connection to server established")
+# Creates SCP Client and puts image
+scp = SCPClient(ssh.get_transport())
+
+
 def upload_pic(request):
 
 	template = loader.get_template('model/model.html')
@@ -46,22 +59,22 @@ def download_pic(request, imageName):
 
 		image = imageName.replace(".obj",".png")
 		filepath = 'model/images/{}'.format(image)
-		hostname='ionic.cs.princeton.edu'
-		port=22
-		username='cmbishop'
-		password='**Cb12751010**'
+		# hostname='ionic.cs.princeton.edu'
+		# port=22
+		# username='cmbishop'
+		# password='**Cb12751010**'
 
 		# The Image to Put and the Object to Get
 		
 		obj = image.replace(".png",".obj")
 		objectpath = 'model/objects/{}'.format(obj)
 
-		ssh=paramiko.SSHClient()
-		ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-		ssh.connect(hostname,port,username,password)
-		print("Connection to server established")
-		# Creates SCP Client and puts image
-		scp = SCPClient(ssh.get_transport())
+		# ssh=paramiko.SSHClient()
+		# ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+		# ssh.connect(hostname,port,username,password)
+		# print("Connection to server established")
+		# # Creates SCP Client and puts image
+		# scp = SCPClient(ssh.get_transport())
 
 		scp.put(filepath, remote_path='/n/fs/donatello/Pixel2Mesh/pixel2mesh/image.png')
 		print("Image transferred")
@@ -86,14 +99,14 @@ def serve_obj(request, objname):
 
 	if request.method == 'POST':
 
-		hostname='ionic.cs.princeton.edu'
-		port=22
-		username='cmbishop'
-		password='**Cb12751010**'
-		ssh=paramiko.SSHClient()
-		ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-		ssh.connect(hostname,port,username,password)
-		print("Connection to server established")
+		# hostname='ionic.cs.princeton.edu'
+		# port=22
+		# username='cmbishop'
+		# password='**Cb12751010**'
+		# ssh=paramiko.SSHClient()
+		# ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+		# ssh.connect(hostname,port,username,password)
+		# print("Connection to server established")
 		# Creates SCP Client and puts image
 		scp = SCPClient(ssh.get_transport())
 

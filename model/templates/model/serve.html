@@ -1,7 +1,36 @@
+<html>
+
+<head>
+<script>
+window.onload = function(){
+  // Change this value to however many seconds you want to delay the text by.
+  var theDelay = 120;
+  var timer = setTimeout("showText()",theDelay*1000)
+}
+function showText(){
+  document.getElementById("delayedText").style.visibility = "visible";
+}
+</script>
+</head>
+
+<body>
+
+<h3> Please wait while your image is processed. When download button appears, click to download. Then, display using Meshlab!</h3>
+
+<div id="delayedText" style="visibility:hidden">
+
 {% block content %}
   <form action="serve_obj/{{objname}}" method="post" >
     {% csrf_token %}
     <button type="submit" value={{objname}}">Download Now!</button>
   </form>
 
+<form action="http://www.meshlabjs.net/">
+    <input type="submit" value="Display in MeshLab" />
+</form>
+
 {% endblock %}
+</div>
+
+</body>
+</html>
