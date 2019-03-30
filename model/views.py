@@ -37,7 +37,6 @@ def upload_pic(request):
 		}
 
 	if request.method == 'POST':
-		print("posted!")
 		form = ImageUploadForm(request.POST, request.FILES)
 		if form.is_valid():
 			if os.path.exists("model/images/{}".format(form.cleaned_data['image'].name)):
