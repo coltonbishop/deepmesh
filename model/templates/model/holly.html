@@ -3,9 +3,7 @@
 
 <html lang="en">
 <head>
-	<link rel="stylesheet" href="{% static 'model/flipclock.css' %}">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="{% static 'model/flipclock.js' %}"></script>    
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,17 +11,6 @@
     <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,400i,500,700" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'model/dist/css/style.css' %}">
     <script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script>
-    <script>
-	window.onload = function(){
-	  // Change this value to however many seconds you want to delay the text by.
-	  var theDelay = 120;
-	  var timer = setTimeout("showText()",theDelay*1000)
-	}
-	function showText(){
-	  document.getElementById("delayedText").style.visibility = "visible";
-	}
-	</script>
-
 </head>
 <body class="is-boxed has-animations">
     <div class="body-wrap boxed-container">
@@ -66,45 +53,12 @@
                     <div class="hero-inner">
                         <div class="hero-copy">
                             <div class="container-sm">
-                                <h1 class="hero-title h2-mobile mt-0 is-revealing">Generating your mesh...</h1>
-                                <p class="hero-paragraph is-revealing">Please wait while your image is processed. This process will take about 2 minutes. When the process is complete, click the Download button to download and the Visualize button to visualize your mesh!</p>
+                                <h1 class="hero-title h2-mobile mt-0 is-revealing">Welcome to DeepMesh</h1>
+                                <p class="hero-paragraph is-revealing">Insert any PNG image of object to be modeled, and DeepMesh will generate a 3D mesh model. </p>
+
                                 <div class="hero-form newsletter-form field field-grouped is-revealing">
                                     <div class="control">
-										    
-									    <div class="clock" style="margin:2em;"></div>
-
-									    <script type="text/javascript">
-									        var clock;
-
-									        $(document).ready(function() {
-
-									            // Instantiate a counter
-									            clock = new FlipClock($('.clock'), 120, {
-									                clockFace: 'Counter',
-									                autoStart: true,
-									                countdown: true
-									            });
-									            
-									        });
-									    </script>	    
-											<div id="delayedText" style="visibility:hidden">
-											{% block content %}
-											  <form action="serve_obj/{{objname}}" method="post" >
-											    {% csrf_token %}
-											    <button class="button button-primary button-block button-shadow" style="margin:5px;" type="submit" value="{{objname}}">Download</button>
-											  </form>
-
-											<form action="http://www.meshlabjs.net/">
-											    <button class="button button-primary button-block button-shadow" style="margin:5px;" type="submit" value="Display in MeshLab">Visualize</button>
-											</form>
-
-											<form action="https://deepmesh.herokuapp.com/">
-											    <button class="button button-primary button-block button-shadow" style="margin:5px;" type="submit" value="Display in MeshLab">New Model</button>
-											</form>
-
-											{% endblock %}
-											</div>
-										  
+                                        <a class="button button-primary button-block button-shadow" href="/model">Make a model!</a>
                                     </div>
                                 </div>
                             </div>

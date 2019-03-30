@@ -37,6 +37,7 @@ def upload_pic(request):
 		}
 
 	if request.method == 'POST':
+		print("posted!")
 		form = ImageUploadForm(request.POST, request.FILES)
 		if form.is_valid():
 			if os.path.exists("model/images/{}".format(form.cleaned_data['image'].name)):
@@ -45,11 +46,33 @@ def upload_pic(request):
 			m.save()
 
 			# CHANGE THE NAME HERE AND PASS IN CONTEXT
+			imageName = m.name
+
+			image = imageName.replace(".obj",".png")
+			filepath = 'model/images/{}'.format(image)
+
+			# The Image to Put and the Object to Get
+			
+			obj = image.replace(".png",".obj")
+			objectpath = 'model/objects/{}'.format(obj)
+
+			scp.put(filepath, remote_path='/n/fs/donatello/Pixel2Mesh/pixel2mesh/image.png')
+			print("Image transferred")
+			stdin,stdout,stderr=ssh.exec_command('cd /n/fs/donatello/Pixel2Mesh/pixel2mesh; rm image.obj')
+			outlines=stdout.readlines()
+			resp=''.join(outlines)
+			print(resp)
+
+			stdin,stdout,stderr=ssh.exec_command('cd /n/fs/donatello/Pixel2Mesh/pixel2mesh; sbatch ./generate.slurm')
+			outlines=stdout.readlines()
+			resp=''.join(outlines)
+			print(resp)
 
 			context = {
-			'image': m,
+				'objname': obj,
 			}
-			return render(request, 'model/download.html', context)
+
+			return render(request, 'model/serve.html', context)
 
 	return HttpResponse(template.render(context,request))
 
@@ -65,7 +88,6 @@ def download_pic(request, imageName):
 		# password='**Cb12751010**'
 
 		# The Image to Put and the Object to Get
-		
 		obj = image.replace(".png",".obj")
 		objectpath = 'model/objects/{}'.format(obj)
 
