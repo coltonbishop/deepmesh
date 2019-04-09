@@ -53,6 +53,7 @@ def upload_pic(request):
 			ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 			ssh.connect(hostname,port,username,password)
 			print("Connection to server established")
+			time.sleep(10)
 			# Creates SCP Client and puts image
 			scp = SCPClient(ssh.get_transport())
 
@@ -103,7 +104,7 @@ def download_pic(request, imageName):
 		print("Connection to server established")
 		# Creates SCP Client and puts image
 		scp = SCPClient(ssh.get_transport())
-
+		time.sleep(10)
 		scp.put(filepath, remote_path='/n/fs/donatello/Pixel2Mesh/pixel2mesh/image.png')
 		print("Image transferred")
 		stdin,stdout,stderr=ssh.exec_command('cd /n/fs/donatello/Pixel2Mesh/pixel2mesh; rm image.obj')
@@ -126,7 +127,6 @@ def download_pic(request, imageName):
 def serve_obj(request, objname):
 
 	if request.method == 'POST':
-
 		# hostname='ionic.cs.princeton.edu'
 		# port=22
 		# username='cmbishop'
@@ -137,7 +137,8 @@ def serve_obj(request, objname):
 		print("Connection to server established")
 		#Creates SCP Client and puts image
 		scp = SCPClient(ssh.get_transport())
-
+		time.sleep(10)
+		
 		objectpath = 'model/objects/{}'.format(objname)
 
 		if os.path.exists(objectpath):
