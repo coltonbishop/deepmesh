@@ -18,12 +18,6 @@ port=22
 username='cmbishop'
 password='**Cb12751010**'
 
-ssh=paramiko.SSHClient()
-ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-ssh.connect(hostname,port,username,password)
-print("Connection to server established")
-# Creates SCP Client and puts image
-scp = SCPClient(ssh.get_transport())
 
 
 def upload_pic(request):
@@ -54,6 +48,13 @@ def upload_pic(request):
 			
 			obj = image.replace(".png",".obj")
 			objectpath = 'model/objects/{}'.format(obj)
+
+			ssh=paramiko.SSHClient()
+			ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+			ssh.connect(hostname,port,username,password)
+			print("Connection to server established")
+			# Creates SCP Client and puts image
+			scp = SCPClient(ssh.get_transport())
 
 			scp.put(filepath, remote_path='/n/fs/donatello/Pixel2Mesh/pixel2mesh/image.png')
 			print("Image transferred")
@@ -96,7 +97,13 @@ def download_pic(request, imageName):
 		# print("Connection to server established")
 		# # Creates SCP Client and puts image
 		# scp = SCPClient(ssh.get_transport())
-
+		ssh=paramiko.SSHClient()
+		ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+		ssh.connect(hostname,port,username,password)
+		print("Connection to server established")
+		# Creates SCP Client and puts image
+		scp = SCPClient(ssh.get_transport())
+		
 		scp.put(filepath, remote_path='/n/fs/donatello/Pixel2Mesh/pixel2mesh/image.png')
 		print("Image transferred")
 		stdin,stdout,stderr=ssh.exec_command('cd /n/fs/donatello/Pixel2Mesh/pixel2mesh; rm image.obj')
@@ -124,11 +131,11 @@ def serve_obj(request, objname):
 		# port=22
 		# username='cmbishop'
 		# password='**Cb12751010**'
-		# ssh=paramiko.SSHClient()
-		# ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-		# ssh.connect(hostname,port,username,password)
-		# print("Connection to server established")
-		# Creates SCP Client and puts image
+		ssh=paramiko.SSHClient()
+		ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+		ssh.connect(hostname,port,username,password)
+		print("Connection to server established")
+		Creates SCP Client and puts image
 		scp = SCPClient(ssh.get_transport())
 
 		objectpath = 'model/objects/{}'.format(objname)
