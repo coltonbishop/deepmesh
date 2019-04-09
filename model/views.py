@@ -17,8 +17,8 @@ hostname='ionic.cs.princeton.edu'
 port=22
 username='cmbishop'
 password='**Cb12751010**'
-
-
+ssh=paramiko.SSHClient()
+ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
 def upload_pic(request):
 
