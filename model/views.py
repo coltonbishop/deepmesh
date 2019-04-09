@@ -98,24 +98,22 @@ def download_pic(request, imageName):
 		# print("Connection to server established")
 		# # Creates SCP Client and puts image
 		# scp = SCPClient(ssh.get_transport())
-		ssh=paramiko.SSHClient()
-		ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 		ssh.connect(hostname,port,username,password)
 		print("Connection to server established")
 		# Creates SCP Client and puts image
 		scp = SCPClient(ssh.get_transport())
-		time.sleep(10)
+		time.sleep(5)
 		scp.put(filepath, remote_path='/n/fs/donatello/Pixel2Mesh/pixel2mesh/image.png')
 		print("Image transferred")
 		stdin,stdout,stderr=ssh.exec_command('cd /n/fs/donatello/Pixel2Mesh/pixel2mesh; rm image.obj')
-		outlines=stdout.readlines()
-		resp=''.join(outlines)
-		print(resp)
+		# outlines=stdout.readlines()
+		# resp=''.join(outlines)
+		# print(resp)
 
 		stdin,stdout,stderr=ssh.exec_command('cd /n/fs/donatello/Pixel2Mesh/pixel2mesh; sbatch ./generate.slurm')
-		outlines=stdout.readlines()
-		resp=''.join(outlines)
-		print(resp)
+		# outlines=stdout.readlines()
+		# resp=''.join(outlines)
+		# print(resp)
 
 		context = {
 			'objname': obj,
@@ -138,7 +136,7 @@ def serve_obj(request, objname):
 		#Creates SCP Client and puts image
 		scp = SCPClient(ssh.get_transport())
 		time.sleep(10)
-		
+
 		objectpath = 'model/objects/{}'.format(objname)
 
 		if os.path.exists(objectpath):
