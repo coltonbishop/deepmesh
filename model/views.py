@@ -52,6 +52,7 @@ def upload_pic(request):
 
 			# Creates SCP Client and puts image
 			scp = SCPClient(ssh.get_transport())
+			time.sleep(5)
 
 			scp.put(filepath, remote_path='/n/fs/donatello/Pixel2Mesh/pixel2mesh/image.png')
 			print("Image transferred")
