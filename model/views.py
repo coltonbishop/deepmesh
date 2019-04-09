@@ -73,49 +73,49 @@ def upload_pic(request):
 
 	return HttpResponse(template.render(context,request))
 
-def download_pic(request, imageName):
+# def download_pic(request, imageName):
 
-	if request.method == 'POST':
+# 	if request.method == 'POST':
 
-		image = imageName.replace(".obj",".png")
-		filepath = 'model/images/{}'.format(image)
-		# hostname='ionic.cs.princeton.edu'
-		# port=22
-		# username='cmbishop'
-		# password='**Cb12751010**'
+# 		image = imageName.replace(".obj",".png")
+# 		filepath = 'model/images/{}'.format(image)
+# 		# hostname='ionic.cs.princeton.edu'
+# 		# port=22
+# 		# username='cmbishop'
+# 		# password='**Cb12751010**'
 
-		# The Image to Put and the Object to Get
-		obj = image.replace(".png",".obj")
-		objectpath = 'model/objects/{}'.format(obj)
+# 		# The Image to Put and the Object to Get
+# 		obj = image.replace(".png",".obj")
+# 		objectpath = 'model/objects/{}'.format(obj)
 
-		# ssh=paramiko.SSHClient()
-		# ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-		# ssh.connect(hostname,port,username,password)
-		# print("Connection to server established")
-		# # Creates SCP Client and puts image
-		# scp = SCPClient(ssh.get_transport())
-		# ssh.connect(hostname,port,username,password)
-		# print("Connection to server established")
-		# Creates SCP Client and puts image
-		scp = SCPClient(ssh.get_transport())
-		time.sleep(5)
-		scp.put(filepath, remote_path='/n/fs/donatello/Pixel2Mesh/pixel2mesh/image.png')
-		print("Image transferred")
-		stdin,stdout,stderr=ssh.exec_command('cd /n/fs/donatello/Pixel2Mesh/pixel2mesh; rm image.obj')
-		# outlines=stdout.readlines()
-		# resp=''.join(outlines)
-		# print(resp)
+# 		# ssh=paramiko.SSHClient()
+# 		# ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+# 		# ssh.connect(hostname,port,username,password)
+# 		# print("Connection to server established")
+# 		# # Creates SCP Client and puts image
+# 		# scp = SCPClient(ssh.get_transport())
+# 		# ssh.connect(hostname,port,username,password)
+# 		# print("Connection to server established")
+# 		# Creates SCP Client and puts image
+# 		scp = SCPClient(ssh.get_transport())
+# 		time.sleep(5)
+# 		scp.put(filepath, remote_path='/n/fs/donatello/Pixel2Mesh/pixel2mesh/image.png')
+# 		print("Image transferred")
+# 		stdin,stdout,stderr=ssh.exec_command('cd /n/fs/donatello/Pixel2Mesh/pixel2mesh; rm image.obj')
+# 		# outlines=stdout.readlines()
+# 		# resp=''.join(outlines)
+# 		# print(resp)
 
-		stdin,stdout,stderr=ssh.exec_command('cd /n/fs/donatello/Pixel2Mesh/pixel2mesh; sbatch ./generate.slurm')
-		# outlines=stdout.readlines()
-		# resp=''.join(outlines)
-		# print(resp)
+# 		stdin,stdout,stderr=ssh.exec_command('cd /n/fs/donatello/Pixel2Mesh/pixel2mesh; sbatch ./generate.slurm')
+# 		# outlines=stdout.readlines()
+# 		# resp=''.join(outlines)
+# 		# print(resp)
 
-		context = {
-			'objname': obj,
-		}
+# 		context = {
+# 			'objname': obj,
+# 		}
 
-		return render(request, 'model/serve.html', context)
+# 		return render(request, 'model/serve.html', context)
 
 
 def serve_obj(request, objname):
@@ -146,7 +146,7 @@ def serve_obj(request, objname):
 				print("Object downloaded")
 			except:
 				print("SCP GET failed")
-				return render(request, 'model/serve.html', context)
+				return HttpResponse("Sorry: there is currently no GPU available. Please try again later.")
 			else:
 				 #the rest of the code
 				 break
