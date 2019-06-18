@@ -15,8 +15,8 @@ import time
 
 hostname='ionic.cs.princeton.edu'
 port=22
-username='cmbishop'
-password='**Cb12751010**'
+username='******'
+password='**********'
 ssh=paramiko.SSHClient()
 ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 ssh.connect(hostname,port,username,password)
@@ -84,8 +84,8 @@ def serve_obj(request, objname):
 	if request.method == 'POST':
 		# hostname='ionic.cs.princeton.edu'
 		# port=22
-		# username='cmbishop'
-		# password='**Cb12751010**'
+		# username='****'
+		# password='************'
 		# ssh=paramiko.SSHClient()
 		# ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 		# ssh.connect(hostname,port,username,password)
