@@ -12,10 +12,9 @@ Web application that converts a 2D RGB image to a 3D mesh model with optional de
 
 <br>
 
+Generated mesh model is downloaded to the user's browser.
 
 <p align="center">
-	
-Generated mesh model is downloaded to the user's browser.
 
 <img src="resources/demo2.gif" width = "700px" />
 
