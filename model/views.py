@@ -15,8 +15,8 @@ import time
 
 hostname='ionic.cs.princeton.edu'
 port=22
-username='cmbishop'
-password='**Cb12751010**'
+username='******'
+password='********'
 ssh=paramiko.SSHClient()
 ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 ssh.connect(hostname,port,username,password)
@@ -86,9 +86,6 @@ def download_pic(request, imageName):
 def serve_obj(request, objname):
 
 	if request.method == 'POST':
-		objectpath = 'model/objects/computer.obj'
-		return serve(request, os.path.basename(objectpath), os.path.dirname(objectpath))
-
 		# hostname='ionic.cs.princeton.edu'
 		# port=22
 		# username='****'
