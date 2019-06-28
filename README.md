@@ -4,7 +4,7 @@ Web application that converts a 2D RGB image to a 3D mesh model with optional de
 
 ## Try it out!
 
-Visit https://www.deepmesh.herokuapp.com to try out the live web app.
+Visit http://deepmesh.herokuapp.com to try out the live web app.
 
 ## Demo
 
