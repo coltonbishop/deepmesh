@@ -21,7 +21,7 @@ Pillow==5.1.0
 pipenv==2018.5.18
 psycopg2==2.7.4
 pycparser==2.18
-Pygments==2.2.0
+Pygments==2.7.4
 pylibmc==1.5.2
 python-memcached==1.59
 pytz==2018.4
