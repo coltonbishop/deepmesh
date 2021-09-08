@@ -17,7 +17,7 @@ MarkupSafe==1.0
 maxminddb==1.4.0
 numpy==1.14.3
 paramiko==2.4.2
-Pillow==5.1.0
+Pillow==8.3.2
 pipenv==2018.5.18
 psycopg2==2.7.4
 pycparser==2.18
